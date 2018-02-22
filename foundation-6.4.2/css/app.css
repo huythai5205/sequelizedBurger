@@ -1,0 +1,30 @@
+body {
+    font-style: oblique;
+    color: #f44242;
+}
+
+label {
+    padding: 0;
+    font-style: oblique;
+    color: #f44242;
+    font-size: 150%;
+}
+
+.main-container {
+    padding: 20px;
+    background: #4d27cd;
+}
+
+.index-container {
+    text-align: center;
+}
+
+.burger-logo {
+    width: 400px;
+    margin: auto;
+}
+
+.input-group {
+    width: 300px;
+    margin: auto;
+}
