@@ -4,12 +4,15 @@ const db = require('../models');
 module.exports = function (app) {
     app.get('/', (req, res) => {
         db.Burger.findAll({}).then((burgersData) => [
-            res.render('index', burgersData)
-            // res.redirect('/')
+            res.render('index', {
+                burgersData
+            })
         ]);
     });
 
     app.post('/api/create', (req, res) => {
+        console.log("creating");
+        console.log("creating");
         db.Burger.create({
             burger_name: req.body.burgerName
         }).then(
@@ -31,9 +34,11 @@ module.exports = function (app) {
     });
 
     app.delete('/api/delete', (req, res) => {
+        console.log("deleting");
+        console.log(req.params.burgerId);
         db.Burger.destroy({
             where: {
-                id: req.params.id
+                id: req.body.burgerId
             }
         }).then(
             res.redirect('/')
