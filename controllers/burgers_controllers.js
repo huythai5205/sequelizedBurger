@@ -11,8 +11,6 @@ module.exports = function (app) {
     });
 
     app.post('/api/create', (req, res) => {
-        console.log("creating");
-        console.log("creating");
         db.Burger.create({
             burger_name: req.body.burgerName
         }).then(
@@ -34,8 +32,6 @@ module.exports = function (app) {
     });
 
     app.delete('/api/delete', (req, res) => {
-        console.log("deleting");
-        console.log(req.params.burgerId);
         db.Burger.destroy({
             where: {
                 id: req.body.burgerId
