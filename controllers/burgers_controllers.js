@@ -1,33 +1,42 @@
-const express = require('express');
-const burger = require('../models/burger.js');
-// const app = express();
-const router = express.Router();
+const db = require('../models');
 
-router.get('/', (req, res) => {
-    burger.getAll((burgersData) => {
-        console.log(burgersData);
-        res.render('index', {
-            burgersData
-        });
+
+module.exports = function (app) {
+    app.get('/', (req, res) => {
+        db.Burger.findAll({}).then((burgersData) => [
+            res.render('index', burgersData)
+            // res.redirect('/')
+        ]);
     });
-});
 
-router.post('/api/create', (req, res) => {
-    burger.create(req.body.burgerName, () => {
-        res.redirect('/');
+    app.post('/api/create', (req, res) => {
+        db.Burger.create({
+            burger_name: req.body.burgerName
+        }).then(
+            res.redirect('/')
+        )
     });
-});
 
-router.put('/api/update', (req, res) => {
-    burger.update(req.body.burgerId, () => {
-        res.redirect('/');
+    app.put('/api/update', (req, res) => {
+        db.Burger.update({
+            devoured: true,
+            customer_name: req.body.customerName
+        }, {
+            where: {
+                id: req.body.burgerId
+            }
+        }).then(
+            res.redirect('/')
+        )
     });
-});
 
-router.delete('/api/delete', (req, res) => {
-    burger.delete(req.body.burgerId, () => {
-        res.redirect('/');
+    app.delete('/api/delete', (req, res) => {
+        db.Burger.destroy({
+            where: {
+                id: req.params.id
+            }
+        }).then(
+            res.redirect('/')
+        )
     });
-});
-
-module.exports = router;
+};
