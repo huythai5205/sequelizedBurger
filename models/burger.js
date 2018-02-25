@@ -1,29 +1,15 @@
-const orm = require('../config/orm.js');
+const Sequelize = require('sequelize');
+const connection = require('../config/connection.js');
 
-const burger = {
-    getAll: function (_callback) {
-        orm.selectAll((res) => {
-            _callback(res);
-        });
+const Burger = connection.define('burgers', {
+    burger_name: {
+        type: Sequelize.STRING
     },
-
-    create: function (burgerName, _callback) {
-        orm.insert(burgerName, () => {
-            _callback();
-        });
-    },
-
-    update: function (burgerId, _callback) {
-        orm.update(burgerId, () => {
-            _callback();
-        });
-    },
-
-    delete: function (burgerId, _callback) {
-        orm.delete(burgerId, () => {
-            _callback();
-        });
+    devoured: {
+        type: Sequelize.BOOLEAN
     }
-};
+});
 
-module.exports = burger;
+Burger.sync();
+
+module.exports = Burger;

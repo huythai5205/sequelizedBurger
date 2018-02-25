@@ -1,24 +1,8 @@
-const mysql = require("mysql2");
+const Sequelize = require('sequelize');
 
-let connection;
-if (process.env.JAWSDB_URL) {
-    connection = mysql.createConnection(process.env.JAWSDB_URL);
-} else {
-    connection = mysql.createConnection({
-        host: "localhost",
-        user: "root",
-        password: "1234",
-        database: "burgers_db"
-    });
-}
-
-
-connection.connect(function (err) {
-    if (err) {
-        console.error("error connecting: " + err.stack);
-        return;
-    }
-    console.log("connected as id " + connection.threadId);
+const connection = new Sequelize('burger_db', 'root', ' 1234', {
+    host: 'localhost',
+    dialect: 'mysql'
 });
 
 module.exports = connection;
