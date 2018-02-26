@@ -7,5 +7,5 @@ module.exports = function (sequelize, DataTypes) {
         },
         customer_name: DataTypes.STRING
     });
-    return Burger
+    return Burger;
 }
