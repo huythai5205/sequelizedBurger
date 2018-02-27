@@ -27,6 +27,7 @@ app.use(express.static(path.join(__dirname, "./foundation-6.4.2")));
 
 require('./controllers/burgers_controllers.js')(app);
 
+
 db.sequelize.sync().then(() => {
     app.listen(PORT, function () {
         console.log("Listening on PORT: " + PORT);
